@@ -14,5 +14,81 @@
 {% endblock %}
 
 {% block content %}
-    闪购超市
+    <div class="market">
+
+        {#        侧边栏#}
+        <div class="type-slider">
+            <ul>
+                {% for foodtype in foodtypes %}
+                    <li class="type-item">
+                        <span></span>
+                        <a href="{% url 'axf:market' foodtype.trackid %}">
+                            {{ foodtype.typename }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        {#    导航#}
+        <nav>
+            <ul>
+                <li>
+                    <span>
+                        全部元素
+                        <i class="glyphicon glyphicon-chevron-up"></i>
+                    </span>
+                </li>
+                <li>
+                    <span>
+                        综合排序
+                        <i class="glyphicon glyphicon-chevron-up"></i>
+                    </span>
+                </li>
+            </ul>
+        </nav>
+
+        {#    商品列表#}
+        <div class="main-content">
+            <div class="content-wrapper">
+                <ul>
+                    {% for goods in goodslist %}
+{#                         一个个商品#}
+                        <li>
+                            <a href="#">
+                                <img class="goods-img" src="{{goods.productimg }}" alt="">
+                                <div class="goods-info">
+                                    <p class="name">{{ goods.productlongname }}
+                                    </p>
+                                    <p class="detailtag">
+                                        {% if goods.isxf %}
+                                            <span class="xf">精选</span>
+                                        {% endif %}
+                                    </p>
+                                    <p class="specifics">
+                                        {{ goods.specifics }}
+                                    </p>
+                                    <p class="price">
+                                        <span class="now-price">${{ goods.price }}</span>
+                                        <span class="market-price">${{ goods.marketprice }}</span>
+                                    </p>
+                                </div>
+                            </a>
+{#                        +- 号图标#}
+                            <div class="bt-wrapper">
+                                <span class="glyphicon glyphicon-plus"></span>
+                                <span class="num">10</span>
+                                <span class="glyphicon glyphicon-minus"></span>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="bounce-view">
+
+            </div>
+        </div>
+
+    </div>
+
 {% endblock %}
